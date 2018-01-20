@@ -9,7 +9,15 @@ for n=(1:7)
     fprintf( '\n\nBlank sign numbers are %d & %d\n\n\n', blanks(n,1), blanks(n,2));
 end
 
-%the order comes from the world island puzzle (I solved it manually)
+fprintf('Solving world\n\n');
+[map] = solveIsland(sprintf('world.txt'));
+for m=1:size(map, 1)
+    fprintf([map(m, :) '\n']);
+end
+fprintf('\n\n\n');
+
+
+%the order comes from the world island puzzle
 continentOrder = [4 3 6 7 5 2 1];
 
 fprintf('*****\n');

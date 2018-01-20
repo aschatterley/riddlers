@@ -162,6 +162,18 @@ o===o=o x   o-o o
 Blank sign numbers are 9 & 19
 
 
+Solving world
+
+    x    
+         
+  o=o x  
+  | :    
+o=o=o=o=o
+    | :  
+  x o o  
+
+
+
 *****
 IMPROVISEDRAFT
 *****
