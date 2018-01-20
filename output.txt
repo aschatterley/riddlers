@@ -1,19 +1,19 @@
 Solving continent 1
 
   o=====o=o x o===o  
-  |     | ?   ?   |  
-  | o-o-o ? o ? x o o
-  |   ? | ? | ?     ?
+  |     | :   :   |  
+  | o-o-o : o : x o o
+  |   : | : | :     :
 x | o-o | o | o=====o
-  | ? | |   | |      
-  o ? | o===o | o-o x
-    ? |     ? | |    
-  x o |   o ? o=o===o
-      |   | ? | ?   |
-o-----o x | o=o ? o |
-      |   |     ? | |
+  | : | |   | |      
+  o : | o===o | o-o x
+    : |     : | |    
+  x o |   o : o=o===o
+      |   | : | :   |
+o-----o x | o=o : o |
+      |   |     : | |
     o | o=o   x o | o
-    | | ?         | ?
+    | | :         | :
     o-o-o x o-o===o-o
 
 
@@ -23,19 +23,19 @@ Blank sign numbers are 6 & 20
 Solving continent 2
 
 o   o===o-o=o x o-o  
-?   ?   | ?     ? |  
-o   ?   | o x o ? o  
-|   ?   |     | ? ?  
-o---o===o x o=o=o ?  
-|       |   ? ? | ?  
-o=o   x o---o ? | o  
-        ?     ? |    
-x o-o=o ? o===o |    
-    |   ? |     |    
+:   :   | :     : |  
+o   :   | o x o : o  
+|   :   |     | : :  
+o---o===o x o=o=o :  
+|       |   : : | :  
+o=o   x o---o : | o  
+        :     : |    
+x o-o=o : o===o |    
+    |   : |     |    
 o===o===o | o---o=o x
 |         |          
 |   x     |   o      
-|         |   ?      
+|         |   :      
 o-o---o x o---o===o  
 
 
@@ -45,19 +45,19 @@ Blank sign numbers are 18 & 1
 Solving continent 3
 
 o===o---o x   o-o=o  
-?   |           ?    
+:   |           :    
 o o | o===o x   o o  
-  | | ?   |     | ?  
-x | o ? o | o-o=o=o  
-  | | ? | |   |      
+  | | :   |     | :  
+x | o : o | o-o=o=o  
+  | | : | |   |      
   | | o | o---o   x  
   | |   |     |      
 o o-o===o---o | x o  
-? ? ?   |   | |   |  
-o ? o   | o | o=o=o x
-| ?     | | | | ?    
-| ? x o=o | o=o o    
-| ?     | |   ?      
+: : :   |   | |   |  
+o : o   | o | o=o=o x
+| :     | | | | :    
+| : x o=o | o=o o    
+| :     | |   :      
 o=o   x o-o===o-o-o  
                      
         x            
@@ -69,19 +69,19 @@ Blank sign numbers are 16 & 18
 Solving continent 4
 
   x o-o---o===o===o
-      |   |   |   ?
-o-o===o x | o-o-o ?
-| |   |   |     ? ?
+      |   |   |   :
+o-o===o x | o-o-o :
+| |   |   |     : :
 o | o | o-o   x o o
 | | | |         |  
 | o | o=====o=o | x
-| ? | ?         |  
+| : | :         |  
 o o=o=o   o x o o  
-  ?       ?   ?    
-  ? x o---o===o===o
-  ?               ?
-x ?   o=o===o---o ?
-  ?     |   |     ?
+  :       :   :    
+  : x o---o===o===o
+  :               :
+x :   o=o===o---o :
+  :     |   |     :
   o-----o x o=o---o
                    
       x            
@@ -95,17 +95,17 @@ Solving continent 5
   o===o-----o-o x o=o
   |                 |
   o=o-----o   x o---o
-  | ?           ?    
-  o ? o=o-----o ? o x
-  ? ? | |     ? ? ?  
-x ? ? | | o o ? ? o=o
-  ? ? | | | ? ? ?   |
-  ? o | o | o=o ? x |
-  ?   |   |   ? ?   |
-  o===o===o x ? o=o |
-  |   ?       ?   | |
-  | x ?       ? o | o
-  |   ?       ? ? | ?
+  | :           :    
+  o : o=o-----o : o x
+  : : | |     : : :  
+x : : | | o o : : o=o
+  : : | | | : : :   |
+  : o | o | o=o : x |
+  :   |   |   : :   |
+  o===o===o x : o=o |
+  |   :       :   | |
+  | x :       : o | o
+  |   :       : : | :
   o   o   x o-o-o=o-o
                      
   x                  
@@ -119,19 +119,19 @@ Solving continent 6
                 x  
                    
 o-o x o-o=o=o-----o
-| ?     | | ?     |
-o ? o===o | o x o-o
-  ? ?     |     ? ?
-x o ? o===o===o ? o
-  | ?     |   | ?  
+| :     | | :     |
+o : o===o | o x o-o
+  : :     |     : :
+x o : o===o===o : o
+  | :     |   | :  
   o=o===o | x o=o  
   | |     |   |    
 o | o=o x o---o===o
-| | | ?       |    
-o=o | ? o---o | o x
-?   | ? |   ? | ?  
-? x o-o=o=o ? o ?  
-?   |   |   ? ? ?  
+| | | :       |    
+o=o | : o---o | o x
+:   | : |   : | :  
+: x o-o=o=o : o :  
+:   |   |   : : :  
 o===o x o   o=o=o=o
 
 
@@ -141,19 +141,19 @@ Blank sign numbers are 15 & 22
 Solving continent 7
 
 o===o=o-o   x   o-o
-?   | | ?         ?
-o=o | o ? x   o===o
-? ? |   ?         ?
-o ? o x o===o===o ?
-  ?               ?
+:   | | :         :
+o=o | o : x   o===o
+: : |   :         :
+o : o x o===o===o :
+  :               :
 x o===o===o=======o
-  ?   ?   |        
-  ? o=o=o | o-o x  
-  ? ? ? | | ?      
-o-o ? o | o=o===o x
-|   ?   | ? |   |  
+  :   :   |        
+  : o=o=o | o-o x  
+  : : : | | :      
+o-o : o | o=o===o x
+|   :   | : |   |  
 | x o===o=o o-o |  
-|   ?       |   |  
+|   :       |   |  
 o===o=o x   o-o o  
                    
     x              
@@ -167,9 +167,9 @@ Solving world
     x    
          
   o=o x  
-  | ?    
+  | :    
 o=o=o=o=o
-    | ?  
+    | :  
   x o o  
 
 
