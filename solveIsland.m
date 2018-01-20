@@ -99,15 +99,17 @@ end
 bridgeProb.Constraints.noPairs1 = optimconstr(size(nPairs, 1));
 bridgeProb.Constraints.noPairs2 = optimconstr(size(nPairs, 1));
 M = 1000; %so that we can do an inequality, but keep it linear
-for n=1:nPairs
-    %effectively, this gives score1 ~= score2
-    bridgeProb.Constraints.noPairs1(n) =  islandScores(groupPairs(n,1)) - islandScores(groupPairs(n,2)) + M*eqBool(n) >= 1;
-    bridgeProb.Constraints.noPairs2(n) =  islandScores(groupPairs(n,1)) - islandScores(groupPairs(n,2)) + M*eqBool(n) <= M-1;
-end
+
+%effectively, this gives score1 ~= score2
+bridgeProb.Constraints.noPairs1 =  islandScores(groupPairs(:,1)) - islandScores(groupPairs(:,2)) + M*eqBool(:) >= 1;
+bridgeProb.Constraints.noPairs2 =  islandScores(groupPairs(:,1)) - islandScores(groupPairs(:,2)) + M*eqBool(:) <= M-1;
 
 %and throw it into the solver
 opts = optimoptions('intlinprog', 'Display', 'none');
-bridgeSol = solve(bridgeProb, opts);
+[bridgeSol, ~, ~, status] = solve(bridgeProb, opts);
+if status.numfeaspoints < 1
+    error('no solution found');
+end
 bridgeSol.bridge1 = round(bridgeSol.bridge1); %clean up the integers
 bridgeSol.bridge2 = round(bridgeSol.bridge2);
 
