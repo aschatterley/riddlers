@@ -46,7 +46,7 @@ nGroups = length(islandGroups);
 nBridges = size(bridgeList, 1);
 nPairs = size(groupPairs, 1);
 nCrossover = size(crossover, 1);
-
+nIslands = sum(cont(:) > 0);
 %now we're ready to get optimizing!
 bridgeProb = optimproblem;
 
@@ -66,6 +66,8 @@ eqBool = optimvar('eqBool', nPairs, 'Type', 'integer', 'LowerBound', 0, 'UpperBo
 rng(1); %add a random objective to break symmetry
 bridgeProb.Objective = sum(bridge1.*rand(size(bridge1))) + sum(bridge2.*rand(size(bridge2)));
 
+%the score for each island
+[islandScores] = getIslandScores(bridgeList, bridge1, bridge2, nIslands);
 
 %constraints:
 %1) bridge2 <= bridge1; so bridge1 is the decision maker
@@ -78,11 +80,9 @@ for n=1:nGroups
     
     %for each island in group, add up all affecting bridges
     for m=1:length(islandGroups{n})
-        island = islandGroups{n}(m);
-        %make a logical list of affected bridges
-        bridgesInGroup = bridgeList(:,1)==island | bridgeList(:,2)==island;
-        groupExp = groupExp + sum(bridge1(bridgesInGroup) + bridge2(bridgesInGroup));
+        groupExp = groupExp + islandScores(islandGroups{n}(m));
     end
+    
     if groupSum(n) ~= 99 %99 means it was a ? in the problem
         bridgeProb.Constraints.groupSumEq(n) = sum(groupExp) == groupSum(n);
     end
@@ -95,28 +95,26 @@ for n=1:nCrossover
 end
 
 
-%4) no equal pairs in a group
+%4) no equal scores in a group
 bridgeProb.Constraints.noPairs1 = optimconstr(size(nPairs, 1));
 bridgeProb.Constraints.noPairs2 = optimconstr(size(nPairs, 1));
 M = 1000; %so that we can do an inequality, but keep it linear
 for n=1:nPairs
-    bridgesToIsle1 = bridgeList(:,1)==groupPairs(n,1) | bridgeList(:,2)==groupPairs(n,1);
-    bridgesToIsle2 = bridgeList(:,1)==groupPairs(n,2) | bridgeList(:,2)==groupPairs(n,2);
-    score1 = sum(bridge1(bridgesToIsle1) + bridge2(bridgesToIsle1)); %the score for each island
-    score2 = sum(bridge1(bridgesToIsle2) + bridge2(bridgesToIsle2));
-   
     %effectively, this gives score1 ~= score2
-    bridgeProb.Constraints.noPairs1(n) =  score1 - score2 + M*eqBool(n) >= 1;
-    bridgeProb.Constraints.noPairs2(n) =  score1 - score2 + M*eqBool(n) <= M-1;
+    bridgeProb.Constraints.noPairs1(n) =  islandScores(groupPairs(n,1)) - islandScores(groupPairs(n,2)) + M*eqBool(n) >= 1;
+    bridgeProb.Constraints.noPairs2(n) =  islandScores(groupPairs(n,1)) - islandScores(groupPairs(n,2)) + M*eqBool(n) <= M-1;
 end
-%in retrospect, probably should have made an islandscore experession...
 
 %and throw it into the solver
 opts = optimoptions('intlinprog', 'Display', 'none');
 bridgeSol = solve(bridgeProb, opts);
-%%
+bridgeSol.bridge1 = round(bridgeSol.bridge1); %clean up the integers
+bridgeSol.bridge2 = round(bridgeSol.bridge2);
+
+solvedScores = getIslandScores(bridgeList, bridgeSol.bridge1, bridgeSol.bridge2, nIslands);
+
 %and get the solved map
-map = outputContinent(cont, bridgeSol, bridgeList);
+map = outputContinent(cont, bridgeSol, bridgeList, solvedScores);
 
 %finally, we should find the missing sign values
 n = 1;
@@ -136,10 +134,19 @@ end
 end
 
 %draw the solution
-function [bigMap] = outputContinent(cont, bridgeSol, bridgeList)
+function [bigMap] = outputContinent(cont, bridgeSol, bridgeList, scores)
+%if we flip it first, this becomes a lot easier
+cont = cont';
+
 map = char(zeros(size(cont)));
-map(cont<0) = 'x';
-map(cont>0) = 'o';
+map(cont<0) = 'x'; %fill in the signs
+%map(cont>0) = 'o';
+
+%replace each island with its score
+
+map(cont>0) = char('0' + scores);
+map = map';
+cont = cont';
 
 bigMap = char(zeros(size(cont)*2-1));
 bigMap(1:2:end, 1:2:end) = map;
@@ -158,12 +165,25 @@ for n=1:size(bridgeList, 1)
             [row(1), col(1)] = find(cont == bridgeList(n, 1), 1);
             [row(2), col(2)] = find(cont == bridgeList(n, 2), 1);
             if bridgeSol.bridge2(n)
-                bigMap(row(1)*2:row(2)*2-2, col(1)*2-1) = '|';%for some reason, ? doesn't work when run as a script?
+                bigMap(row(1)*2:row(2)*2-2, col(1)*2-1) = '#';%for some reason, ? doesn't work when run as a script?
             else
-                bigMap(row(1)*2:row(2)*2-2, col(1)*2-1) = ':';
+                bigMap(row(1)*2:row(2)*2-2, col(1)*2-1) = '|';
             end
         end
     end
+end
+end
+
+%get the score for each island, i.e. how many bridges touch it?
+function [islandScores] = getIslandScores(bridgeList, bridge1, bridge2, nIslands)
+if isa(bridge1, 'double') %this way it can be either a double or optimexpr
+    islandScores = zeros(nIslands, 1);
+else
+    islandScores = optimexpr(nIslands);
+end
+for n=1:nIslands
+    bridgesInGroup = bridgeList(:,1)==n | bridgeList(:,2)==n;
+    islandScores(n) = sum(bridge1(bridgesInGroup) + bridge2(bridgesInGroup));
 end
 end
 
