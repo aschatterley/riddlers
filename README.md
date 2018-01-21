@@ -6,4 +6,5 @@ This code needs Matlab 2017b with the optimization toolbox. It uses the new kind
 run solveAllContinents.m to get the solution to the puzzle
 
 The output is the solved map, with the each island represented by its score. 
-- & | represent single bridges, = & # represent double bridges
+
+  \- & | represent single bridges, = & # represent double bridges
