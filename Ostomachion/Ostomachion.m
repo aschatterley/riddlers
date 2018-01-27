@@ -56,6 +56,9 @@ shapeColor = optimvar('shapeColor', 4, 14, 'Type', 'integer', ...
 shapeColor(1,3).LowerBound = 1;
 shapeColor(2,13).LowerBound = 1;
 
+%make the remainders more consistent
+shapeColor(4,5).UpperBound = 0;
+
 %some random objective
 ostProb.Objective = sum(sum(shapeColor .* rand(size(shapeColor))));
 
@@ -109,7 +112,11 @@ plot([0 0 NaN 12 12 NaN 24 24 NaN 36 36 NaN], ...
 
  axis tight
 axis square
- 
+a = gca;
+a.Position = [0 0 1 1];
+a.XAxis.Visible = 'off';
+a.YAxis.Visible = 'off';
+
 function [] = plotOst(shapeColor, shapes, areas, plotN)
 
 colors = [  1, 0.5 ,0.5;
@@ -123,7 +130,7 @@ for n=1:length(shapes)
     
     fill(shapes{n}(:,1)+dx, shapes{n}(:,2)+dy, ...
         colors(find(shapeColor(:, n), 1),:) ); hold on
-%    text(mean(shapes{n}(:,1)), mean(shapes{n}(:,2)), num2str((n)));
+  %  text(mean(shapes{n}(:,1)), mean(shapes{n}(:,2)), num2str((n)));
     text(mean(shapes{n}(:,1))+dx-0.3, mean(shapes{n}(:,2))+dy, num2str(areas(n)));
 %    grid on
 end
