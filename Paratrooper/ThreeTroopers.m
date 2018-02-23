@@ -4,7 +4,7 @@
 %you wanted, you could started with random cartesian locations for the
 %three troopers, then calculate the circle they encompas
 
-rng(8);
+rng(6);
 gifName = 'paratroopers.gif';
 frameDelay = 0.04;
 
