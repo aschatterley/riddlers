@@ -58,7 +58,7 @@ for tick=(1:5000)
         CTarget = 1;
         CWait = 0;
         plot(r*cosd(troopAng(2)) + centre(1), r*sind(troopAng(2)) + centre(2),...
-            'Marker', 'x', 'Color', [0 0.8 0], 'MarkerSize', 10);
+            'Marker', 'x', 'Color', [0 0 1], 'MarkerSize', 10);
         plot(r*cosd(troopAng(1)) + centre(1), r*sind(troopAng(1)) + centre(2), ...
             'Marker', '*', 'Color', [1 0 0], 'MarkerSize', 5);
     end
