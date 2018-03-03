@@ -7,8 +7,21 @@
 %for 13 (80 shuffles):
 %[2 9 4 5 11 12 10 1 8 13 3 6 7]
 
-cards = 1:8;
-[totalShuffles, cardList] = findJumps(cards, 0)
+% best = 1;
+% for p=perms(2:10)'
+%     [totalShuffles, cardList] = findJumps([1 p'], 0);
+%     if totalShuffles > best
+%         fprintf('best n = %d\n', totalShuffles);
+%         disp(cardList);
+%         best = totalShuffles;
+%     end
+% end
+    
+% 
+function [totalShuffles, cardList] = findShuffles(nCards)
+cards = 1:nCards;
+ [totalShuffles, cardList] = findJumps(cards, 0);
+end
 
 function [nHops, list] = findJumps(cards, n)
     inOrder = (cards == [0, 2:length(cards)]);
