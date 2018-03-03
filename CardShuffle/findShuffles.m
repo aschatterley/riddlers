@@ -1,3 +1,6 @@
+%find the longest set of shuffles for a given starting deck of cards
+%e.g. findShuffles(1:10)
+
 %start with ordered list: 1 2 3 4
 %for a given list:
 %   find all n>1 which are in their place (list == [1 2 3 4])
